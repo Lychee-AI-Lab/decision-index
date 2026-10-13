@@ -1,0 +1,5 @@
+# Submissions
+
+| Model | Public index | Results | Engine | Hardware | Settings and limits |
+|---|---:|---|---|---|---|
+| Lychee-27B ([`LycheeAI/Lychee-27B`](https://huggingface.co/LycheeAI/Lychee-27B) @ `89bea82`; decision model fine-tuned from Qwen3.8-27B, bf16, one forward pass per question, temperature 1.0) | **62.74** | [full run and scores](https://huggingface.co/datasets/LycheeAI/lychee-27b-decision-index/blob/4be302ed3b5670c272c4a6ed2fd3f98f76ef22f0/runs/lychee-27b/scores.json) | the kit's `http` engine (`model=lychee-27b`) against the model's bundled `/v1/systemone` server (`python -m lychee.server`), kit `f8552a1` (edition 0.3), unmodified runner, compact rows, 128 shards by sha256 of run id, concatenated | NVIDIA H100 80 GB, BF16, one server per GPU, one request at a time per server | 8,192 input tokens per request; 1–255 options per choice; 2–10 score levels. Nothing was truncated and no options were removed. 345 requests (30 of them scored) have prompts over 8,192 tokens and are `unsupported`. |
